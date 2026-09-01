@@ -8,7 +8,7 @@ function State() {
     const [places, setPlaces] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const API_BASE_URL = "http://127.0.0.1:8000";
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
         let cancelled = false;
@@ -20,12 +20,8 @@ function State() {
 
                 const [regionResponse, placesResponse] =
                     await Promise.all([
-                        fetch(
-                            `http://127.0.0.1:8000/api/regions/${stateId}`
-                        ),
-                        fetch(
-                            `http://127.0.0.1:8000/api/places/region/${stateId}`
-                        ),
+                        fetch(`${API_BASE_URL}/regions/${stateId}`),
+                        fetch(`${API_BASE_URL}/places/region/${stateId}`),
                     ]);
 
                 if (!regionResponse.ok) {

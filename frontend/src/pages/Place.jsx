@@ -12,7 +12,7 @@ import "leaflet/dist/leaflet.css";
 
 function Place() {
 
-    // const API_BASE_URL = "http://127.0.0.1:8000";
+    // const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     const getImageUrl = (image) => {
         if (!image) return null;
@@ -59,9 +59,8 @@ function Place() {
                 setError("");
 
                 const response = await fetch(
-                    `http://127.0.0.1:8000/api/place-details/${placeId}`
+                    `${import.meta.env.VITE_API_BASE_URL}/place-details/${placeId}`
                 );
-
                 if (!response.ok) {
                     throw new Error(
                         `Could not load place details (${response.status})`

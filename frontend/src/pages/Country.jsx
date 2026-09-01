@@ -16,8 +16,8 @@ function Country() {
                 setError("");
 
                 const [countryResponse, regionsResponse] = await Promise.all([
-                    fetch(`http://127.0.0.1:8000/api/countries/${countryId}`),
-                    fetch(`http://127.0.0.1:8000/api/regions/country/${countryId}`),
+                    fetch(`${import.meta.env.VITE_API_BASE_URL}/countries/${countryId}`),
+                    fetch(`${import.meta.env.VITE_API_BASE_URL}/regions/country/${countryId}`),
                 ]);
 
                 if (!countryResponse.ok) {

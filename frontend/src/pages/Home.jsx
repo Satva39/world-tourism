@@ -17,7 +17,7 @@ function Home() {
                 setError("");
 
                 const response = await fetch(
-                    "http://127.0.0.1:8000/api/countries",
+                    `${import.meta.env.VITE_API_BASE_URL}/countries`,
                 );
 
                 if (!response.ok) {
@@ -45,7 +45,7 @@ function Home() {
                 setFeaturedError("");
 
                 const response = await fetch(
-                    "http://127.0.0.1:8000/api/places/featured"
+                    `${import.meta.env.VITE_API_BASE_URL}/places/featured`
                 );
 
                 if (!response.ok) {
@@ -215,7 +215,7 @@ function Home() {
                                                 place.cover_image.startsWith("http://") ||
                                                     place.cover_image.startsWith("https://")
                                                     ? place.cover_image
-                                                    : `http://127.0.0.1:8000${place.cover_image.startsWith("/")
+                                                    : `${import.meta.env.VITE_API_BASE_URL}${place.cover_image.startsWith("/")
                                                         ? ""
                                                         : "/"
                                                     }${place.cover_image}`
