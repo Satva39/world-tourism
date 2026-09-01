@@ -41,7 +41,7 @@ export async function searchFlights({
     });
 
     const response = await fetch(
-        `${API_BASE_URL}/api/travel/flights?${params.toString()}`
+        `${API_BASE_URL}/travel/flights?${params.toString()}`
     );
 
     const data = await response.json();
