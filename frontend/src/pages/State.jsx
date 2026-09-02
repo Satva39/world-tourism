@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { getImageUrl } from "../utils/imageUrl";
 
 function State() {
     const { countryId, stateId } = useParams();
@@ -68,20 +69,6 @@ function State() {
             cancelled = true;
         };
     }, [stateId]);
-
-    function getImageUrl(imageUrl) {
-        if (!imageUrl) return "";
-
-        if (
-            imageUrl.startsWith("http://") ||
-            imageUrl.startsWith("https://")
-        ) {
-            return imageUrl;
-        }
-
-        return `${API_BASE_URL}${imageUrl.startsWith("/") ? "" : "/"
-            }${imageUrl}`;
-    }
 
     const regionLabel = useMemo(() => {
         const type = String(

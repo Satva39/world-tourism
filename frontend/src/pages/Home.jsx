@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getImageUrl } from "../utils/imageUrl";
 import SearchBar from "../components/SearchBar";
 
 function Home() {
@@ -211,15 +212,7 @@ function Home() {
                                 <div className="place-card__image">
                                     {place.cover_image ? (
                                         <img
-                                            src={
-                                                place.cover_image.startsWith("http://") ||
-                                                    place.cover_image.startsWith("https://")
-                                                    ? place.cover_image
-                                                    : `${import.meta.env.VITE_API_BASE_URL}${place.cover_image.startsWith("/")
-                                                        ? ""
-                                                        : "/"
-                                                    }${place.cover_image}`
-                                            }
+                                            src={getImageUrl(place.cover_image)}
                                             alt={place.name}
                                             className="place-card__image-img"
                                             loading="lazy"

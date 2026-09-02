@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import API_BASE_URL from "../config/api";
 
 function SearchBar() {
     const [query, setQuery] = useState("");
@@ -32,12 +33,12 @@ function SearchBar() {
             try {
                 setLoading(true);
 
-                const response = await fetch( `${import.meta.env.VITE_API_BASE_URL}/search?q=${encodeURIComponent( trimmedQuery )}`,
+                const response = await fetch(
+                    `${API_BASE_URL}/search?q=${encodeURIComponent(trimmedQuery)}`,
                     {
                         signal: controller.signal,
                     }
                 );
-
                 if (!response.ok) {
                     throw new Error("Search failed");
                 }

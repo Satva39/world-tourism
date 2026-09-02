@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import CurrentLocation from "../components/travel/CurrentLocation";
 import API_BASE_URL from "../config/api";
+import { getImageUrl } from "../utils/imageUrl";
 import {
     MapContainer,
     Marker,
@@ -14,29 +15,29 @@ function Place() {
 
     // const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-    const getImageUrl = (image) => {
-        if (!image) return null;
+    // const getImageUrl = (image) => {
+    //     if (!image) return null;
 
-        const imageUrl =
-            image.image_url ||
-            image.url ||
-            image.image ||
-            null;
+    //     const imageUrl =
+    //         image.image_url ||
+    //         image.url ||
+    //         image.image ||
+    //         null;
 
-        if (!imageUrl) return null;
+    //     if (!imageUrl) return null;
 
-        // Absolute URL
-        if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {
-            return imageUrl;
-        }
+    //     // Absolute URL
+    //     if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {
+    //         return imageUrl;
+    //     }
 
-        // Backend-served image
-        if (imageUrl.startsWith("/")) {
-            return `${API_BASE_URL}${imageUrl}`;
-        }
+    //     // Backend-served image
+    //     if (imageUrl.startsWith("/")) {
+    //         return `${API_BASE_URL}${imageUrl}`;
+    //     }
 
-        return imageUrl;
-    };
+    //     return imageUrl;
+    // };
 
     const { countryId, stateId, placeId } = useParams();
 
@@ -59,7 +60,7 @@ function Place() {
                 setError("");
 
                 const response = await fetch(
-                    `${import.meta.env.VITE_API_BASE_URL}/place-details/${placeId}`
+                    `${API_BASE_URL}/place-details/${placeId}`
                 );
                 if (!response.ok) {
                     throw new Error(
