@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import CurrentLocation from "../components/travel/CurrentLocation";
 import API_BASE_URL from "../config/api";
 import { getImageUrl } from "../utils/imageUrl";
+import L from "leaflet";
 import {
     MapContainer,
     Marker,
@@ -10,6 +11,20 @@ import {
     TileLayer,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+
+const defaultMarkerIcon = L.icon({
+    iconRetinaUrl: "/images/marker-icon-2x.png",
+    iconUrl: "/images/marker-icon.png",
+    shadowUrl: "/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+});
 
 function Place() {
 
@@ -181,7 +196,7 @@ function Place() {
     async function handleFlightBooking(offerId) {
         try {
             const response = await fetch(
-                `${API_BASE_URL}/api/travel/flights/${offerId}/booking-link`,
+                `${API_BASE_URL}/travel/flights/${offerId}/booking-link`,
                 {
                     method: "POST",
                     headers: {
@@ -235,7 +250,7 @@ function Place() {
             });
 
             const response = await fetch(
-                `${API_BASE_URL}/api/travel/flights?${params.toString()}`
+                `${API_BASE_URL}/travel/flights?${params.toString()}`
             );
 
             const result = await response.json();
@@ -508,6 +523,7 @@ function Place() {
                                         place.latitude,
                                         place.longitude,
                                     ]}
+                                    icon={defaultMarkerIcon}
                                 >
                                     <Popup>
                                         <strong>{place.name}</strong>
