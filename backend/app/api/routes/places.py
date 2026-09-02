@@ -31,14 +31,22 @@ def get_region_places(
             detail="Region not found",
         )
 
-    places = db.scalars(
-        select(Place)
-        .where(
+    results = (
+        db.query(
+            Place,
+            PlaceImage.image_url.label("cover_image"),
+        )
+        .outerjoin(
+            PlaceImage,
+            (PlaceImage.place_id == Place.id) & (PlaceImage.is_cover.is_(True)),
+        )
+        .filter(
             Place.region_id == region_id,
             Place.is_active.is_(True),
         )
         .order_by(Place.name)
-    ).all()
+        .all()
+    )
 
     return [
         {
@@ -46,8 +54,9 @@ def get_region_places(
             "region_id": place.region_id,
             "name": place.name,
             "slug": place.slug,
+            "cover_image": cover_image,
         }
-        for place in places
+        for place, cover_image in results
     ]
 
 
