@@ -9,7 +9,7 @@ const regionImages = {
     "Chhattisgarh": "/images/states/chhattisgarh.jpg",
     "Goa": "/images/states/goa.jpg",
     "Gujarat": "/images/states/gujarat.jpg",
-    "Haryana": "/images/states/haryana.jpg",
+    "Haryana": "/images/states/haryana.png",
     "Himachal Pradesh": "/images/states/himachal-pradesh.gif",
     "Jharkhand": "/images/states/jharkhand.jpg",
     "Karnataka": "/images/states/karnataka.jpg",
