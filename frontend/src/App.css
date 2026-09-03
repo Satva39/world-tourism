@@ -5818,11 +5818,9 @@ body,
 .home-page .country-card__visual {
   height: 112px;
   background:
-    radial-gradient(
-      circle at 50% 55%,
+    radial-gradient(circle at 50% 55%,
       rgba(245, 158, 11, 0.10),
-      transparent 36%
-    ),
+      transparent 36%),
     linear-gradient(135deg, #edf4ff 0%, #f8fafc 100%);
 }
 
@@ -5916,7 +5914,7 @@ body,
   margin: 0 auto;
 }
 
-.site-footer__inner > div:first-child {
+.site-footer__inner>div:first-child {
   padding-bottom: 34px;
 
   display: flex;
@@ -5972,7 +5970,7 @@ body,
     padding: 40px 18px 20px;
   }
 
-  .site-footer__inner > div:first-child {
+  .site-footer__inner>div:first-child {
     flex-direction: column;
     gap: 20px;
     padding-bottom: 28px;
@@ -5983,4 +5981,27 @@ body,
     flex-direction: column;
     gap: 8px;
   }
+}
+
+/* Final polish: region card number badge */
+.region-card__number {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.92);
+  color: #ffffff;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  z-index: 3;
+}
+
+.region-card__visual {
+  position: relative;
 }
