@@ -5,6 +5,7 @@ from sqlalchemy import select
 from app.db.database import SessionLocal
 from app.db.models.place import Place
 from app.db.models.place_image import PlaceImage
+from app.db.models.region import Region
 
 IMAGE_DATA = {
     # Andaman and Nicobar Islands
@@ -2624,7 +2625,7 @@ IMAGE_DATA = {
             "sort_order": 1,
         },
     ],
-    "pinjore-gardens": [
+    ("haryana", "pinjore-gardens"): [
         {
             "image_url": "/images/places/pinjore-gardens.jpg",
             "alt_text": "Pinjore Gardens",
@@ -2704,7 +2705,7 @@ IMAGE_DATA = {
             "sort_order": 1,
         },
     ],
-    "nada-sahib-gurudwara": [
+    ("haryana", "nada-sahib-gurudwara"): [
         {
             "image_url": "/images/places/nada-sahib-gurudwara.jpg",
             "alt_text": "Nada Sahib Gurudwara",
@@ -5824,11 +5825,23 @@ def seed_place_images() -> None:
     skipped = 0
 
     try:
-        places = dict(
-            db.execute(
-                select(Place.slug, Place.id)
-            ).all()
+        # Load all places once.
+        all_places = (
+            db.query(Place, Region.slug.label("region_slug"))
+            .join(Region, Place.region_id == Region.id)
+            .all()
         )
+
+        # Lookup by (region_slug, place_slug)
+        places_by_region_and_slug = {
+            (region_slug, place.slug): place.id for place, region_slug in all_places
+        }
+
+        # Lookup place slugs that are unique globally.
+        places_by_slug = {}
+
+        for place, region_slug in all_places:
+            places_by_slug.setdefault(place.slug, []).append(place.id)
 
         existing_images = {
             (place_id, image_url)
@@ -5840,45 +5853,62 @@ def seed_place_images() -> None:
             ).all()
         }
 
-        for place_slug, images in IMAGE_DATA.items():
-            place_id = places.get(place_slug)
+        for place_key, images in IMAGE_DATA.items():
 
-            if place_id is None:
-                print(
-                    f"Place not found: {place_slug}"
-                )
-                continue
+            # Support both:
+            # "place-slug"
+            # ("region-slug", "place-slug")
+            if isinstance(place_key, tuple):
+                region_slug, place_slug = place_key
 
-            for image_data in images:
-                image_url = image_data["image_url"]
+                place_id = places_by_region_and_slug.get((region_slug, place_slug))
 
-                existing_key = (
-                    place_id,
-                    image_url,
-                )
-
-                if existing_key in existing_images:
-                    skipped += 1
+                if place_id is None:
+                    print(f"Place not found: {place_key}")
                     continue
 
-                db.add(
-                    PlaceImage(
-                        place_id=place_id,
-                        image_url=image_url,
-                        alt_text=image_data.get("alt_text"),
-                        is_cover=image_data.get(
-                            "is_cover",
-                            False,
-                        ),
-                        sort_order=image_data.get(
-                            "sort_order",
-                            0,
-                        ),
-                    )
-                )
+            else:
+                place_slug = place_key
+                matching_ids = places_by_slug.get(place_slug, [])
 
-                existing_images.add(existing_key)
-                created += 1
+                if not matching_ids:
+                    print(
+                        f"Place not found: {place_slug}"
+                    )
+                    continue
+                
+                for place_id in matching_ids:
+                
+                    for image_data in images:
+                        image_url = image_data["image_url"]
+                
+                        existing_key = (
+                            place_id,
+                            image_url,
+                        )
+                
+                        if existing_key in existing_images:
+                            skipped += 1
+                            continue
+                        
+                        db.add(
+                            PlaceImage(
+                                place_id=place_id,
+                                image_url=image_url,
+                                alt_text=image_data.get("alt_text"),
+                                is_cover=image_data.get(
+                                    "is_cover",
+                                    False,
+                                ),
+                                sort_order=image_data.get(
+                                    "sort_order",
+                                    0,
+                                ),
+                            )
+                        )
+                
+                        existing_images.add(existing_key)
+                        created += 1
 
         db.commit()
 
