@@ -3120,59 +3120,86 @@ body {
 }
 
 
-/* ---------------------------------------------------------
-   FAMOUS PLACES SECTION
-   --------------------------------------------------------- */
+/* =========================================================
+   FAMOUS PLACE — EXPLORE BUTTON REFINEMENT
+   ========================================================= */
 
-.state-page .places-section {
-  margin-top: 82px;
+.state-page .place-card__badge {
+  position: absolute;
+
+  left: 16px;
+  right: auto;
+  bottom: 16px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  min-height: 40px;
+
+  padding: 0 10px 0 15px;
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.96);
+  color: #175cd3;
+
+  font-size: 11px;
+  font-weight: 850;
+
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  box-shadow:
+    0 8px 22px rgba(15, 23, 42, 0.18);
+
+  backdrop-filter: blur(10px);
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.state-page .places-section .section-heading {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+.state-page .place-card__badge span {
+  width: 28px;
+  height: 28px;
 
-  gap: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  margin-bottom: 30px;
-}
+  border-radius: 9px;
 
-.state-page .places-section .section-heading>div {
-  min-width: 0;
-}
-
-.state-page .places-section .section-heading .section-label {
-  margin-bottom: 12px;
-}
-
-.state-page .places-section .section-heading h2 {
-  margin: 0;
-
-  max-width: 720px;
-
-  color: #101828;
-
-  font-size: clamp(38px, 4.5vw, 56px);
-  line-height: 1;
-
-  letter-spacing: -0.045em;
-  font-weight: 800;
-}
-
-.state-page .places-section .section-heading>p {
-  flex: 0 0 350px;
-
-  max-width: 350px;
-
-  margin: 0 0 4px;
-
-  color: #667085;
+  background: #2166e8;
+  color: #ffffff;
 
   font-size: 15px;
-  line-height: 1.65;
+  line-height: 1;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
 }
 
+.state-page .place-card:hover .place-card__badge {
+  transform: translateY(-2px);
+
+  background: #2166e8;
+  color: #ffffff;
+
+  box-shadow:
+    0 12px 25px rgba(33, 102, 232, 0.25);
+}
+
+.state-page .place-card:hover .place-card__badge span {
+  background: #ffffff;
+  color: #2166e8;
+
+  transform: translateX(2px);
+}
 
 /* ---------------------------------------------------------
    PLACES GRID
@@ -5626,5 +5653,334 @@ body,
 
   .state-page .place-card__image {
     height: 190px;
+  }
+}
+
+/* =========================================================
+   COUNTRY CARD — SECOND POLISH
+   ========================================================= */
+
+.home-page .country-card {
+  min-height: 235px;
+}
+
+.home-page .country-card__visual {
+  height: 118px;
+}
+
+.home-page .country-card-content {
+  min-height: 117px;
+  padding: 19px 20px 18px;
+}
+
+.home-page .country-card-content h3 {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.home-page .country-card .explore-link {
+  min-height: 38px;
+  box-sizing: border-box;
+
+  padding: 8px 11px 8px 13px;
+
+  border: 1px solid #dce8ff;
+  border-radius: 11px;
+
+  background: #f5f8ff;
+
+  color: #2166e8;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.home-page .country-card .explore-link span {
+  width: 24px;
+  height: 24px;
+
+  margin-left: 8px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  font-size: 15px;
+}
+
+.home-page .country-card:hover .explore-link {
+  border-color: #2166e8;
+  background: #2166e8;
+  color: #ffffff;
+}
+
+.home-page .country-card:hover .explore-link span {
+  background: rgba(255, 255, 255, 0.95);
+  color: #2166e8;
+}
+
+/* =========================================================
+   FOOTER — FINAL POLISH
+   ========================================================= */
+
+.site-footer {
+  margin-top: 70px;
+
+  padding: 52px 24px 24px;
+
+  background: #0f172a;
+  color: #cbd5e1;
+
+  text-align: left;
+}
+
+.site-footer__inner {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.site-footer__inner>div:first-child {
+  padding-bottom: 38px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.site-footer h3 {
+  margin: 0 0 12px;
+
+  color: #ffffff;
+
+  font-size: 22px;
+  font-weight: 800;
+
+  letter-spacing: -0.02em;
+}
+
+.site-footer p {
+  max-width: 620px;
+
+  margin: 0;
+
+  color: #94a3b8;
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.site-footer__bottom {
+  padding-top: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  color: #94a3b8;
+
+  font-size: 13px;
+}
+
+.site-footer__bottom span:last-child {
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .site-footer {
+    padding: 42px 18px 20px;
+  }
+
+  .site-footer__inner>div:first-child {
+    padding-bottom: 28px;
+  }
+
+  .site-footer__bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* =========================================================
+   FINAL VISUAL POLISH — COUNTRY CARD
+   ========================================================= */
+
+.home-page .country-card {
+  min-height: 225px;
+  border-radius: 22px;
+}
+
+.home-page .country-card__visual {
+  height: 112px;
+  background:
+    radial-gradient(
+      circle at 50% 55%,
+      rgba(245, 158, 11, 0.10),
+      transparent 36%
+    ),
+    linear-gradient(135deg, #edf4ff 0%, #f8fafc 100%);
+}
+
+.home-page .country-card__icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  border-color: #e0e9f8;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+.home-page .country-card__icon svg {
+  width: 29px;
+  height: 29px;
+}
+
+.home-page .country-card-content {
+  min-height: 113px;
+  padding: 18px 20px 17px;
+}
+
+.home-page .country-card-content h3 {
+  margin-bottom: 10px;
+  font-size: 21px;
+}
+
+.home-page .country-card .explore-link {
+  min-height: 36px;
+  padding: 7px 10px 7px 13px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.home-page .country-card .explore-link span {
+  width: 23px;
+  height: 23px;
+  margin-left: 7px;
+  font-size: 14px;
+}
+
+/* =========================================================
+   FINAL VISUAL POLISH — FAMOUS PLACE EXPLORE
+   ========================================================= */
+
+.state-page .place-card__badge {
+  left: 16px !important;
+  right: auto !important;
+  bottom: 16px !important;
+
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: max-content !important;
+
+  height: 40px !important;
+  min-height: 40px !important;
+
+  padding: 0 10px 0 15px !important;
+
+  border-radius: 12px !important;
+
+  background: rgba(255, 255, 255, 0.96) !important;
+  color: #175cd3 !important;
+
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.18) !important;
+}
+
+.state-page .place-card__badge span {
+  flex: 0 0 28px;
+
+  width: 28px !important;
+  height: 28px !important;
+
+  border-radius: 9px !important;
+
+  background: #2166e8 !important;
+  color: #ffffff !important;
+}
+
+/* =========================================================
+   FINAL VISUAL POLISH — FOOTER
+   ========================================================= */
+
+.site-footer {
+  margin-top: 65px;
+  padding: 50px 24px 22px;
+  background: #0b1428;
+}
+
+.site-footer__inner {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+.site-footer__inner > div:first-child {
+  padding-bottom: 34px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 60px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.site-footer h3 {
+  margin: 0 0 10px;
+
+  color: #ffffff;
+
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.site-footer p {
+  max-width: 500px;
+  margin: 0;
+
+  color: #94a3b8;
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.site-footer__bottom {
+  padding-top: 19px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  color: #94a3b8;
+
+  font-size: 12px;
+}
+
+.site-footer__bottom span:last-child {
+  color: #cbd5e1;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 600px) {
+  .site-footer {
+    padding: 40px 18px 20px;
+  }
+
+  .site-footer__inner > div:first-child {
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 28px;
+  }
+
+  .site-footer__bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
   }
 }

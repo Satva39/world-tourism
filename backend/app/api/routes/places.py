@@ -31,15 +31,8 @@ def get_region_places(
             detail="Region not found",
         )
 
-    results = (
-        db.query(
-            Place,
-            PlaceImage.image_url.label("cover_image"),
-        )
-        .outerjoin(
-            PlaceImage,
-            (PlaceImage.place_id == Place.id) & (PlaceImage.is_cover.is_(True)),
-        )
+    places = (
+        db.query(Place)
         .filter(
             Place.region_id == region_id,
             Place.is_active.is_(True),
@@ -54,9 +47,12 @@ def get_region_places(
             "region_id": place.region_id,
             "name": place.name,
             "slug": place.slug,
-            "cover_image": cover_image,
+            "cover_image": next(
+                (image.image_url for image in place.images if image.is_cover),
+                None,
+            ),
         }
-        for place, cover_image in results
+        for place in places
     ]
 
 
@@ -64,15 +60,8 @@ def get_region_places(
 def get_featured_places(
     db: Session = Depends(get_db),
 ):
-    results = (
-        db.query(
-            Place,
-            PlaceImage.image_url.label("cover_image"),
-        )
-        .outerjoin(
-            PlaceImage,
-            (PlaceImage.place_id == Place.id) & (PlaceImage.is_cover.is_(True)),
-        )
+    places = (
+        db.query(Place)
         .filter(
             Place.is_featured.is_(True),
             Place.is_active.is_(True),
@@ -90,9 +79,12 @@ def get_featured_places(
             "slug": place.slug,
             "short_description": place.short_description,
             "country_id": (place.region.country_id if place.region else None),
-            "cover_image": cover_image,
+            "cover_image": next(
+                (image.image_url for image in place.images if image.is_cover),
+                None,
+            ),
         }
-        for place, cover_image in results
+        for place in places
     ]
 
 
