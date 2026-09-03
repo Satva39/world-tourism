@@ -1,6 +1,45 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
+const regionImages = {
+    "Andhra Pradesh": "/images/states/andhra-pradesh.jpg",
+    "Arunachal Pradesh": "/images/states/arunachal-pradesh.jpg",
+    "Assam": "/images/states/assam.gif",
+    "Bihar": "/images/states/bihar.webp",
+    "Chhattisgarh": "/images/states/chhattisgarh.jpg",
+    "Goa": "/images/states/goa.jpg",
+    "Gujarat": "/images/states/gujarat.jpg",
+    "Haryana": "/images/states/haryana.jpg",
+    "Himachal Pradesh": "/images/states/himachal-pradesh.gif",
+    "Jharkhand": "/images/states/jharkhand.jpg",
+    "Karnataka": "/images/states/karnataka.jpg",
+    "Kerala": "/images/states/kerala.gif",
+    "Madhya Pradesh": "/images/states/madhya-pradesh.jpg",
+    "Maharashtra": "/images/states/maharashtra.jpg",
+    "Manipur": "/images/states/manipur.jpg",
+    "Meghalaya": "/images/states/meghalaya.jpg",
+    "Mizoram": "/images/states/mizoram.png",
+    "Nagaland": "/images/states/nagaland.gif",
+    "Odisha": "/images/states/odisha.png",
+    "Punjab": "/images/states/punjab.png",
+    "Rajasthan": "/images/states/rajasthan.jpg",
+    "Sikkim": "/images/states/sikkim.png",
+    "Tamil Nadu": "/images/states/tamil-nadu.jpg",
+    "Telangana": "/images/states/telangana.jpg",
+    "Tripura": "/images/states/tripura.jpg",
+    "Uttar Pradesh": "/images/states/uttar-pradesh.jpg",
+    "Uttarakhand": "/images/states/uttarakhand.webp",
+    "West Bengal": "/images/states/west-bengal.jpg",
+    "Andaman and Nicobar Islands": "/images/states/andaman-and-nicobar-islands.png",
+    "Chandigarh": "/images/states/chandigarh.png",
+    "Dadra and Nagar Haveli and Daman and Diu": "/images/states/dadra-and-nagar-haveli-and-daman-and-diu.jpg",
+    "Delhi": "/images/states/delhi.avif",
+    "Jammu and Kashmir": "/images/states/jammu-and-kashmir.gif",
+    "Ladakh": "/images/states/ladakh.jpg",
+    "Lakshadweep": "/images/states/lakshadweep.png",
+    "Puducherry": "/images/states/puducherry.jpg"
+};
+
 function Country() {
     const { countryId } = useParams();
 
@@ -116,7 +155,19 @@ function Country() {
                                     to={`/country/${countryId}/state/${region.id}`}
                                     className="region-card"
                                 >
-                                    <div className="region-card__content">
+                                    <div className="region-card__image">
+                                        {regionImages[region.name] ? (
+                                            <img
+                                                src={regionImages[region.name]}
+                                                alt={region.name}
+                                                loading="lazy"
+                                            />
+                                        ) : (
+                                            <div className="region-card__image-placeholder">
+                                                <span aria-hidden="true">✦</span>
+                                            </div>
+                                        )}
+
                                         <span className="region-number">
                                             {String(index + 1).padStart(2, "0")}
                                         </span>
@@ -129,11 +180,14 @@ function Country() {
                                                 ? "Union Territory"
                                                 : "State"}
                                         </span>
+                                    </div>
 
+                                    <div className="region-card__content">
                                         <h3>{region.name}</h3>
 
                                         <span className="region-action">
-                                            Explore places →
+                                            Explore places
+                                            <span aria-hidden="true">→</span>
                                         </span>
                                     </div>
                                 </Link>

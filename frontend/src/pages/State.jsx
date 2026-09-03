@@ -223,6 +223,7 @@ function State() {
 
                                         <span className="place-card__badge">
                                             Explore
+                                            <span aria-hidden="true">↗</span>
                                         </span>
                                     </div>
 
@@ -234,7 +235,8 @@ function State() {
                                         )}
 
                                         <span className="place-card__action">
-                                            View destination →
+                                            View destination
+                                            <span aria-hidden="true">→</span>
                                         </span>
                                     </div>
                                 </Link>

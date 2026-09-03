@@ -151,16 +151,45 @@ function Home() {
                                 to={`/country/${country.id}`}
                                 className="country-card"
                             >
-                                <div className="country-card-content">
+                                <div className="country-card__visual">
+                                    <span className="country-card__number">
+                                        {String(countries.indexOf(country) + 1).padStart(2, "0")}
+                                    </span>
+
+                                    <span className="country-card__icon" aria-hidden="true">
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <circle
+                                                cx="12"
+                                                cy="12"
+                                                r="8.5"
+                                                stroke="currentColor"
+                                                strokeWidth="1.8"
+                                            />
+                                            <path
+                                                d="M3.8 12H20.2M12 3.5C14.1 5.8 15.2 8.7 15.2 12C15.2 15.3 14.1 18.2 12 20.5C9.9 18.2 8.8 15.3 8.8 12C8.8 8.7 9.9 5.8 12 3.5Z"
+                                                stroke="currentColor"
+                                                strokeWidth="1.5"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            />
+                                        </svg>
+                                    </span>
+
                                     <span className="country-code">
                                         {country.iso_code}
                                     </span>
+                                </div>
 
+                                <div className="country-card-content">
                                     <h3>{country.name}</h3>
 
                                     <span className="explore-link">
                                         Explore
-                                        <span>→</span>
+                                        <span aria-hidden="true">→</span>
                                     </span>
                                 </div>
                             </Link>

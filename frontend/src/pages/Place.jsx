@@ -17,9 +17,9 @@ import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 const defaultMarkerIcon = L.icon({
-    iconRetinaUrl: "/images/marker-icon-2x.png",
-    iconUrl: "/images/marker-icon.png",
-    shadowUrl: "/images/marker-shadow.png",
+    iconRetinaUrl: markerIcon2x,
+    iconUrl: markerIcon,
+    shadowUrl: markerShadow,
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
@@ -440,7 +440,18 @@ function Place() {
                     <article className="place-card place-card--about">
                         <div className="place-card__topline">
                             <span className="section-label">DISCOVER</span>
-                            <span className="place-card__icon">✦</span>
+                            <span className="place-card__icon" aria-hidden="true">
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M12 3L13.8 9.2L20 11L13.8 12.8L12 19L10.2 12.8L4 11L10.2 9.2L12 3Z"
+                                        fill="currentColor"
+                                    />
+                                </svg>
+                            </span>
                         </div>
 
                         <h2>About {place.name}</h2>
@@ -455,7 +466,28 @@ function Place() {
                     <article className="place-card place-card--location">
                         <div className="place-card__topline">
                             <span className="section-label">LOCATION</span>
-                            <span className="place-card__icon">⌖</span>
+                            <span className="place-card__icon" aria-hidden="true">
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M12 21C16 17 19 13.7 19 9.5C19 5.9 15.9 3 12 3C8.1 3 5 5.9 5 9.5C5 13.7 8 17 12 21Z"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                    <circle
+                                        cx="12"
+                                        cy="9.5"
+                                        r="2.5"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                    />
+                                </svg>
+                            </span>
                         </div>
 
                         <h2>Where it is</h2>

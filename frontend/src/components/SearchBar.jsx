@@ -59,7 +59,7 @@ function SearchBar() {
             } finally {
                 setLoading(false);
             }
-        }, 300);
+        }, 180);
 
         return () => {
             clearTimeout(timer);
@@ -110,17 +110,17 @@ function SearchBar() {
                     aria-label="Search destinations"
                 />
 
-                {loading && <span className="search-loading">...</span>}
+                {loading && <span className="search-spinner" aria-label="Searching" />}
             </div>
 
             {open && query.trim() && (
                 <div className="search-results">
                     {loading && (
-                        <div className="search-message">
-                            Searching destinations...
+                        <div className="search-message search-message--loading">
+                            <span className="search-spinner" aria-hidden="true" />
+                            <span>Searching destinations...</span>
                         </div>
                     )}
-
                     {!loading && !hasResults && (
                         <div className="search-message">
                             No destinations found.
